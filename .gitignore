@@ -1,0 +1,12 @@
+# Build outputs of the release script (published via GitHub Releases, not git)
+/*.apk
+
+# Any build/ tree (app, android, sdk)
+build/
+
+# Release signing material — never commit
+/keystore/
+dsh_mobile_app/android/key.properties
+
+# Internal development notes (machine-specific paths, LAN addresses, dev tokens)
+AGENTS.md

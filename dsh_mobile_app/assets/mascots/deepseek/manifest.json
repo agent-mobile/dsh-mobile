@@ -1,0 +1,62 @@
+{
+  "id": "deepseek",
+  "name": "DeepSeek",
+  "canvas": {
+    "width": 1024,
+    "height": 1024
+  },
+  "missing": [
+    "eye_right",
+    "claw_left",
+    "claw_right",
+    "antenna_right",
+    "foot_right"
+  ],
+  "pivots": {
+    "antenna_left": {
+      "x": 700.0,
+      "y": 200.0
+    },
+    "foot_left": {
+      "x": 725.0,
+      "y": 732.0
+    }
+  },
+  "eyes": {
+    "left_center": {
+      "x": 520.0,
+      "y": 504.0
+    },
+    "right_center": {
+      "x": 520.0,
+      "y": 504.0
+    },
+    "radius": 25,
+    "highlight_offset": {
+      "x": 0,
+      "y": 0
+    }
+  },
+  "mouth": {
+    "center": {
+      "x": 368.0,
+      "y": 663.0
+    },
+    "closed_size": {
+      "w": 167,
+      "h": 72
+    },
+    "open_max_size": {
+      "w": 88,
+      "h": 44
+    }
+  },
+  "amplitude": {
+    "claw_deg_multiplier": 0.0,
+    "hand_deg_multiplier": 0.0,
+    "foot_deg_multiplier": 0.25,
+    "antenna_deg_multiplier": 0.4,
+    "body_swing_multiplier": 0.5,
+    "float_multiplier": 1.0
+  }
+}

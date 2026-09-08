@@ -1,0 +1,19 @@
+name: dsh_dart_sdk
+description: >-
+  Dart wire-protocol client for the DeepSeek Harness dsh web /api surface:
+  HTTP unary/respond transport, two WebSocket event downlinks, Bearer-token
+  authentication, and the session event fold. Mirrors the TypeScript
+  apiproxy/connection contract shapes.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  http: ^1.2.0
+  web_socket_channel: ^3.0.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0

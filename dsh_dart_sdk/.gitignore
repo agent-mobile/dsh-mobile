@@ -1,0 +1,6 @@
+# Dart build artifacts
+build/
+.dart_tool/
+
+# Libraries are consumed via git/path; the lockfile is app-side only
+pubspec.lock
