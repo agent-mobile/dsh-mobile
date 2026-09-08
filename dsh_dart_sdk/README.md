@@ -1,6 +1,6 @@
 # dsh_dart_sdk
 
-[agent-mobile 仓库总览](../README.md) | 纯 Dart SDK
+[dsh-mobile 仓库总览](../README.md) | 纯 Dart SDK
 
 DeepSeek Harness（dsh）宿主 `/api` 线协议的 Dart 客户端。**不 import 任何 TS
 源码**——按宿主 `dsh-client-connection` / `dsh-host-apiproxy` 的公开契约手工镜像，
@@ -14,7 +14,7 @@ DeepSeek Harness（dsh）宿主 `/api` 线协议的 Dart 客户端。**不 impor
 dependencies:
   dsh_dart_sdk:
     git:
-      url: https://github.com/agent-mobile/agent-mobile.git
+      url: https://github.com/agent-mobile/dsh-mobile.git
       path: dsh_dart_sdk
 ```
 

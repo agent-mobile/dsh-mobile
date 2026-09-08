@@ -1,4 +1,4 @@
-# agent-mobile
+# dsh-mobile
 
 面向 AI Agent 工具的移动端配套仓库：**当前适配 DeepSeek Harness（[dsh](https://github.com/deepseek-ai/deepseek-harness)）**，OpenClaw / ZCode 等陆续接入。包含两部分：
 
@@ -52,8 +52,8 @@ dsh web
 - Android 构建：Android SDK 35 相关工具链
 
 ```sh
-git clone https://github.com/agent-mobile/agent-mobile.git
-cd agent-mobile
+git clone https://github.com/agent-mobile/dsh-mobile.git
+cd dsh-mobile
 
 # SDK 单测
 cd dsh_dart_sdk && dart pub get && dart test && cd ..

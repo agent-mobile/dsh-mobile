@@ -1,6 +1,6 @@
 # dsh_mobile_app
 
-[agent-mobile 仓库总览](../README.md) | Flutter 手机 App
+[dsh-mobile 仓库总览](../README.md) | Flutter 手机 App
 
 DeepSeek Harness（dsh）web 主机的移动客户端。通过
 [dsh-mobile-gateway](https://github.com/agent-mobile/dsh-mobile-gateway)
