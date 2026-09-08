@@ -10,3 +10,6 @@ dsh_mobile_app/android/key.properties
 
 # Internal development notes (machine-specific paths, LAN addresses, dev tokens)
 AGENTS.md
+
+# Local video-editing material (raw footage + intermediate segments)
+docs/video-raw/
