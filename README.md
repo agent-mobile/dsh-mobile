@@ -68,6 +68,7 @@ flutter build apk --release
 
 ## 文档索引
 
+- **[语音对话 · 实时转写 · 远程组网 完整指南](docs/VOICE-AND-NETWORK.md)**：文字/语音模式切换、实时转写、dsh-speech 语音链路配置、局域网 / 蒲公英 / WireGuard 组网
 - [App 功能与开发说明](dsh_mobile_app/README.md)
 - [Dart SDK 用法](dsh_dart_sdk/README.md)
 - [`SDK-0.1.2-MIGRATION.md`](SDK-0.1.2-MIGRATION.md)：dsh 0.1.1 → 0.1.2 的 `/api` 协议变化与 Dart 侧映射（改协议先读这份）
