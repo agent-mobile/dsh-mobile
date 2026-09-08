@@ -2,8 +2,10 @@
 ///
 /// Mirrors the TypeScript `approvals.ts` / `questions.ts` contract. Approval
 /// requests and user questions arrive as answerable `server-request` frames on
-/// the mux stream; the client answers via `POST /api/respond` echoing the
-/// frame's `rpcId`. The HTTP response body is an `RpcReceipt`.
+/// the mux stream; the client answers via `POST /api/$events/result` keyed by
+/// the generation id and the waterfall's event id. The posted value rides as
+/// the waterfall's return value, so its shape must match the host answerer's
+/// return type verbatim (a bare outcome string / a bare `{answers:[...]}`).
 library;
 
 import 'transport.dart';
@@ -13,12 +15,16 @@ import 'wire.dart';
 ///
 /// 0.1.2 correlates the answer by the waterfall's [eventId] and the
 /// generation's [clientId] (from the `ready` frame), not a frame rpcId. The
-/// [request] carries the projected approval fields (agent stripped).
+/// [request] carries the projected approval fields (`agent`/`signal` stripped
+/// — the projection keeps only `{toolName, callId?, reason?}`, so the owning
+/// session id is NOT in there; it rides on the frame's agent id and must be
+/// passed via [sessionId]).
 class ApprovalRequest {
   const ApprovalRequest({
     required this.clientId,
     required this.eventId,
     required this.request,
+    this.sessionId,
   });
 
   /// The `$events` generation id (from the `ready` frame) needed to answer.
@@ -30,20 +36,29 @@ class ApprovalRequest {
   /// The projected approval request object (`agent`/`signal` stripped).
   final Map<String, Object?> request;
 
-  String? get sessionId => request['sessionId'] as String?;
+  /// The session the waterfall belongs to (the frame's agent id). Null only
+  /// for hand-built requests; answerers key their pending-entry cleanup on it.
+  final String? sessionId;
+
   String? get approvalId => request['approvalId'] as String?;
   String? get toolName => request['toolName'] as String?;
   String? get callId => request['callId'] as String?;
   String? get reason => request['reason'] as String?;
 
   /// Build from one `waterfall` frame's [eventId], the generation [clientId],
-  /// and the projected [request] object.
+  /// and the projected [request] object. [sessionId] is the frame's agent id.
   factory ApprovalRequest.fromWaterfall({
     required String clientId,
     required String eventId,
     required Map<String, Object?> request,
+    String? sessionId,
   }) =>
-      ApprovalRequest(clientId: clientId, eventId: eventId, request: request);
+      ApprovalRequest(
+        clientId: clientId,
+        eventId: eventId,
+        request: request,
+        sessionId: sessionId,
+      );
 }
 
 /// The only outcomes a client may give (cancelled/unavailable are host-side).
@@ -204,8 +219,11 @@ class DshInteractionApi {
   ///
   /// 0.1.2 answers are posted to `/api/$events/result` keyed by the generation
   /// [request.clientId] (from the `ready` frame) and the pending
-  /// [request.eventId] (from the `waterfall` frame). [outcome] is the client
-  /// verdict; the host resolves `cancelled`/`unavailable` itself.
+  /// [request.eventId] (from the `waterfall` frame). The posted value IS the
+  /// waterfall's return value: the host's `ApprovalService` type-checks it
+  /// against the outcome vocabulary verbatim and normalizes anything else
+  /// (any wrapping object) to the fail-closed `'unavailable'`, so the value
+  /// must be the bare outcome string — the web UI returns the same.
   Future<void> answerApproval({
     required ApprovalRequest request,
     required ApprovalOutcome outcome,
@@ -213,18 +231,18 @@ class DshInteractionApi {
     await _client.respondEvent(RemoteEventResult.result(
       clientId: request.clientId,
       eventId: request.eventId,
-      value: {
-        'approvalId': request.approvalId,
-        'outcome': switch (outcome) {
-          ApprovalOutcome.allowedOnce => 'allowed-once',
-          ApprovalOutcome.rejected => 'rejected',
-        },
+      value: switch (outcome) {
+        ApprovalOutcome.allowedOnce => 'allowed-once',
+        ApprovalOutcome.rejected => 'rejected',
       },
     ));
   }
 
   /// Answer one user-question `waterfall` batch. The answer is one whole batch
   /// for the ask (never split per question), posted to `/api/$events/result`.
+  /// The posted value IS the waterfall's return value — the host's
+  /// `ask_user_question` tool reads `result.answers` off it directly, so the
+  /// [QuestionAnswerBatch.toJson] object must ride bare (no `answer` wrapper).
   Future<void> answerQuestions({
     required QuestionRequest request,
     required QuestionAnswerBatch answer,
@@ -232,7 +250,7 @@ class DshInteractionApi {
     await _client.respondEvent(RemoteEventResult.result(
       clientId: request.clientId,
       eventId: request.eventId,
-      value: {'answer': answer.toJson()},
+      value: answer.toJson(),
     ));
   }
 }

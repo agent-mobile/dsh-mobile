@@ -946,10 +946,10 @@ class _ChatScreenState extends State<ChatScreen> {
         request: request,
         outcome: outcome,
       );
-      final sessionId = request.sessionId;
-      if (sessionId != null) {
-        widget.connection.clearApproval(sessionId, request.eventId);
-      }
+      // The pending entry is keyed by the frame's agent id (the session id);
+      // prefer the captured one, falling back to this chat's session.
+      final sessionId = request.sessionId ?? widget.sessionId;
+      widget.connection.clearApproval(sessionId, request.eventId);
       return true;
     } catch (error) {
       if (mounted) _showError('审批失败', error);

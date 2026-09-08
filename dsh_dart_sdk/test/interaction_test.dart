@@ -7,20 +7,26 @@ import 'package:test/test.dart';
 void main() {
   group('approval', () {
     test('ApprovalRequest.fromWaterfall parses the projected request', () {
+      // The host's projection strips agent/signal and keeps only
+      // toolName/callId/reason — the owning session id rides the FRAME's
+      // agent id, passed explicitly, never the request map.
       final request = ApprovalRequest.fromWaterfall(clientId: 'gen-1', eventId: 'ev-1', request: {
-        'sessionId': 's1',
-        'approvalId': 'a1',
         'toolName': 'bash',
         'callId': 'c1',
         'reason': 'run as current user',
-      });
+      }, sessionId: 's1');
       expect(request.clientId, 'gen-1');
       expect(request.eventId, 'ev-1');
       expect(request.sessionId, 's1');
-      expect(request.approvalId, 'a1');
+      expect(request.approvalId, isNull);
       expect(request.toolName, 'bash');
       expect(request.callId, 'c1');
       expect(request.reason, 'run as current user');
+      // Hand-built requests without a frame session stay null (not a map read).
+      expect(
+        ApprovalRequest.fromWaterfall(clientId: 'g', eventId: 'e', request: const {}).sessionId,
+        isNull,
+      );
     });
 
     test('answerApproval posts the client-response envelope', () async {

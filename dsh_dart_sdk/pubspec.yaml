@@ -4,7 +4,7 @@ description: >-
   HTTP unary/respond transport, two WebSocket event downlinks, Bearer-token
   authentication, and the session event fold. Mirrors the TypeScript
   apiproxy/connection contract shapes.
-version: 0.1.0
+version: 0.1.1
 publish_to: none
 
 environment:

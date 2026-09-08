@@ -145,6 +145,9 @@ void main() {
     expect(connection.approvals('s1'), hasLength(1));
     expect(connection.approvals('s1')['ev-a']!.toolName, 'bash');
     expect(connection.approvals('s1')['ev-a']!.callId, 'c1');
+    // The frame's agent id is the owning session id — the answerer's cleanup
+    // key, since the projected request carries no sessionId of its own.
+    expect(connection.approvals('s1')['ev-a']!.sessionId, 's1');
   });
 
   test('clearApproval drops the answered card and cancel clears approvals too',

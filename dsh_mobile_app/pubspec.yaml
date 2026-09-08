@@ -2,7 +2,7 @@
 description: "Mobile client for the DeepSeek Harness dsh web server."
 publish_to: 'none'
 
-version: 1.0.97+97
+version: 1.0.99+99
 
 environment:
   sdk: ^3.11.5

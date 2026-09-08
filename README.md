@@ -4,7 +4,7 @@ DeepSeek Harness（[dsh](https://github.com/deepseek-ai/deepseek-harness)）的�
 
 | 目录 | 内容 | 版本 |
 | --- | --- | --- |
-| [`dsh_mobile_app/`](dsh_mobile_app/) | Flutter 手机 App：在手机上使用 dsh agent（聊天、审批、语音） | 1.0.96 |
+| [`dsh_mobile_app/`](dsh_mobile_app/) | Flutter 手机 App：在手机上使用 dsh agent（聊天、审批、语音） | 1.0.99 |
 | [`dsh_dart_sdk/`](dsh_dart_sdk/) | 纯 Dart SDK：手写镜像宿主 `/api` 线协议（`dsh-client-connection` / `dsh-host-apiproxy` 的 Dart 对应物） | 0.1.0 |
 
 App 不依赖任何 fork：配合官方 dsh + 两个服务端插件即可使用——

@@ -739,13 +739,15 @@ class ConnectionController extends ChangeNotifier {
     switch (frame.event) {
       case 'approval/request':
         if (sessionId is String) {
-          // The frame carries no approvalId (it comes from the session log);
-          // key the pending entry by the waterfall eventId so the answer
-          // correlates. toolName/callId/reason ride in `request`.
+          // The frame carries no approvalId (it comes from the session log)
+          // and its projected request has no sessionId either — the owning
+          // session id IS the frame's agentId, so capture it on the request
+          // for the answerer's cleanup.
           approvals(sessionId)[eventId] = ApprovalRequest.fromWaterfall(
             clientId: _clientId ?? '',
             eventId: eventId,
             request: request,
+            sessionId: sessionId,
           );
         }
       case 'user-questions/request':

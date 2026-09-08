@@ -18,13 +18,15 @@ Future<void> main(List<String> args) async {
   print('== \$events/result wire check ==');
 
   // A fresh eventId has no pending waterfall on the host; the post is expected
-  // to be refused, which proves the \$events/result envelope round-trips.
+  // to be refused, which proves the \$events/result envelope round-trips. The
+  // value is the bare outcome string: the host's ApprovalService normalizes
+  // any other return shape to the fail-closed 'unavailable'.
   Object? approvalError;
   try {
     await client.respondEvent(RemoteEventResult.result(
       clientId: mintRpcId(),
       eventId: mintRpcId(),
-      value: {'approvalId': 'no-such-approval', 'outcome': 'allowed-once'},
+      value: 'allowed-once',
     ));
   } catch (e) {
     approvalError = e;
@@ -36,11 +38,9 @@ Future<void> main(List<String> args) async {
     await client.respondEvent(RemoteEventResult.result(
       clientId: mintRpcId(),
       eventId: mintRpcId(),
-      value: {
-        'answer': QuestionAnswerBatch([
-          (id: 'q1', answer: QuestionAnswer(selected: ['A'])),
-        ]).toJson(),
-      },
+      value: QuestionAnswerBatch([
+        (id: 'q1', answer: QuestionAnswer(selected: ['A'])),
+      ]).toJson(),
     ));
   } catch (e) {
     questionError = e;
