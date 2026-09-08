@@ -1,11 +1,11 @@
 # 语音对话 · 实时转写 · 远程组网 完整指南
 
 > 本指南在三个仓库**同步维护、内容一致**，在哪一个仓库看到都可以：
-> [dsh-mobile](https://github.com/elskly-cmyk/dsh-mobile) ·
-> [dsh-mobile-gateway](https://github.com/elskly-cmyk/dsh-mobile-gateway) ·
-> [dsh-speech](https://github.com/elskly-cmyk/dsh-speech)
+> [agent-mobile](https://github.com/agent-mobile/agent-mobile) ·
+> [dsh-mobile-gateway](https://github.com/agent-mobile/dsh-mobile-gateway) ·
+> [dsh-speech](https://github.com/agent-mobile/dsh-speech)
 
-整体关系一句话：**手机 App（dsh-mobile）** 通过 **网关插件（dsh-mobile-gateway）** 连上电脑里的 dsh；语音能力（听写、播报、实时转写）由 **语音插件（dsh-speech）** 提供。文字模式、语音对话、实时转写是 App 里的三种交互形态，服务端配好一次，三种形态共用。
+整体关系一句话：**手机 App（agent-mobile）** 通过 **网关插件（dsh-mobile-gateway）** 连上电脑里的 dsh；语音能力（听写、播报、实时转写）由 **语音插件（dsh-speech）** 提供。文字模式、语音对话、实时转写是 App 里的三种交互形态，服务端配好一次，三种形态共用。
 
 ---
 
@@ -13,8 +13,8 @@
 
 ```sh
 npm install -g @deepseek-ai/dsh
-dsh plugin --profile web add github:elskly-cmyk/dsh-mobile-gateway   # 局域网/远程访问（必需）
-dsh plugin --profile web add github:elskly-cmyk/dsh-speech           # 语音能力（语音功能需要）
+dsh plugin --profile web add github:agent-mobile/dsh-mobile-gateway   # 局域网/远程访问（必需）
+dsh plugin --profile web add github:agent-mobile/dsh-speech           # 语音能力（语音功能需要）
 ```
 
 在 `~/.dsh/profiles/web/cordis.patch.yml` 里给**两个插件配同一个 token**：
@@ -95,7 +95,7 @@ dsh plugin --profile web add github:elskly-cmyk/dsh-speech           # 语音能
 
 密钥值写在 `~/.dsh/.env`：`DASHSCOPE_API_KEY=sk-xxxx`（重启 dsh web 生效）；也可以在「语音服务」页面直接填（内联保存，界面只回显掩码）。
 
-**其他链路**（详见 [dsh-speech README](https://github.com/elskly-cmyk/dsh-speech)）：
+**其他链路**（详见 [dsh-speech README](https://github.com/agent-mobile/dsh-speech)）：
 
 - `openai-compatible`：OpenAI / Groq / 硅基流动等任何兼容端点；
 - `local-relay`：自建 SenseVoice + CosyVoice2，支持**声纹说话人分离**（`diarization: true`）；

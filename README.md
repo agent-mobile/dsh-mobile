@@ -1,6 +1,6 @@
-# dsh-mobile
+# agent-mobile
 
-DeepSeek Harness（[dsh](https://github.com/deepseek-ai/deepseek-harness)）的移动端配套仓库，包含两部分：
+面向 AI Agent 工具的移动端配套仓库：**当前适配 DeepSeek Harness（[dsh](https://github.com/deepseek-ai/deepseek-harness)）**，OpenClaw / ZCode 等陆续接入。包含两部分：
 
 | 目录 | 内容 | 版本 |
 | --- | --- | --- |
@@ -9,8 +9,8 @@ DeepSeek Harness（[dsh](https://github.com/deepseek-ai/deepseek-harness)）的�
 
 App 不依赖任何 fork：配合官方 dsh + 两个服务端插件即可使用——
 
-- [dsh-mobile-gateway](https://github.com/elskly-cmyk/dsh-mobile-gateway)：局域网访问 + token 门控 `/m/api`（**必需**）
-- [dsh-speech](https://github.com/elskly-cmyk/dsh-speech)：ASR / TTS / 实时转录（语音功能需要）
+- [dsh-mobile-gateway](https://github.com/agent-mobile/dsh-mobile-gateway)：局域网访问 + token 门控 `/m/api`（**必需**）
+- [dsh-speech](https://github.com/agent-mobile/dsh-speech)：ASR / TTS / 实时转录（语音功能需要）
 
 ![高光：扫码配对 · 一键连接 · 工具审批 · 语音对话 · 实时转写](docs/demo.gif)
 
@@ -25,8 +25,8 @@ App 不依赖任何 fork：配合官方 dsh + 两个服务端插件即可使用�
 
 ```sh
 npm install -g @deepseek-ai/dsh
-dsh plugin --profile web add github:elskly-cmyk/dsh-mobile-gateway
-dsh plugin --profile web add github:elskly-cmyk/dsh-speech   # 语音功能需要
+dsh plugin --profile web add github:agent-mobile/dsh-mobile-gateway
+dsh plugin --profile web add github:agent-mobile/dsh-speech   # 语音功能需要
 
 # 在 ~/.dsh/profiles/web/cordis.patch.yml 中为两个插件各配同一个 token：
 #   - id: mobile-gateway
@@ -52,8 +52,8 @@ dsh web
 - Android 构建：Android SDK 35 相关工具链
 
 ```sh
-git clone https://github.com/elskly-cmyk/dsh-mobile.git
-cd dsh-mobile
+git clone https://github.com/agent-mobile/agent-mobile.git
+cd agent-mobile
 
 # SDK 单测
 cd dsh_dart_sdk && dart pub get && dart test && cd ..

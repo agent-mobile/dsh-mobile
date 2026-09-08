@@ -1,9 +1,9 @@
 # dsh_mobile_app
 
-[dsh-mobile 仓库总览](../README.md) | Flutter 手机 App
+[agent-mobile 仓库总览](../README.md) | Flutter 手机 App
 
 DeepSeek Harness（dsh）web 主机的移动客户端。通过
-[dsh-mobile-gateway](https://github.com/elskly-cmyk/dsh-mobile-gateway)
+[dsh-mobile-gateway](https://github.com/agent-mobile/dsh-mobile-gateway)
 插件的 `/m/api` 面连接官方 dsh，无需任何 fork 或源码修改。
 
 ## 功能
