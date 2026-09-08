@@ -12,6 +12,8 @@ App 不依赖任何 fork：配合官方 dsh + 两个服务端插件即可使用�
 - [dsh-mobile-gateway](https://github.com/elskly-cmyk/dsh-mobile-gateway)：局域网访问 + token 门控 `/m/api`（**必需**）
 - [dsh-speech](https://github.com/elskly-cmyk/dsh-speech)：ASR / TTS / 实时转录（语音功能需要）
 
+![高光：扫码配对 · 一键连接 · 工具调用审批](docs/demo.gif)
+
 ## 快速上手
 
 **1. 服务端**（电脑）：安装 dsh 与插件，配一个 token：
