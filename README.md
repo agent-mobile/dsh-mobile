@@ -12,7 +12,12 @@ App 不依赖任何 fork：配合官方 dsh + 两个服务端插件即可使用�
 - [dsh-mobile-gateway](https://github.com/elskly-cmyk/dsh-mobile-gateway)：局域网访问 + token 门控 `/m/api`（**必需**）
 - [dsh-speech](https://github.com/elskly-cmyk/dsh-speech)：ASR / TTS / 实时转录（语音功能需要）
 
-![高光：扫码配对 · 一键连接 · 工具调用审批](docs/demo.gif)
+![高光：扫码配对 · 一键连接 · 工具审批 · 语音对话 · 实时转写](docs/demo.gif)
+
+| 工具调用审批 | 语音对话（ASR + TTS） | 实时转写 |
+| --- | --- | --- |
+| <img src="docs/screen-approval.png" width="240"/> | <img src="docs/screen-voice.png" width="240"/> | <img src="docs/screen-transcribe.png" width="240"/> |
+| 工作区外写入先弹审批卡，点「允许一次」继续，拒绝即不动 | 对它说话实时转写，AI 流式回复并语音播报 | 长段落逐句出稿、带说话人标签，一键发送到对话 |
 
 ## 快速上手
 
